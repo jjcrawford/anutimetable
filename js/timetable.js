@@ -119,7 +119,6 @@ var Calendar = {
         });
 
         Calendar.putItem(item, displayDiv);
-		
 		if (item.solo) { //If the class has no alternatives, automatically 'choose' it
 			$(displayDiv.find('a.choose')[0]).click();
 		}
@@ -685,6 +684,7 @@ $(function () {
     $('#add-course').on('click', Course.get);
     $('#clear-courses').on('click', Course.clear);
     $('#load').on('click', $('#file').change(loadJSON.eventHandler).click);
+	
 
     $('#course-name').typeahead({
         highlight: true,

@@ -11,6 +11,7 @@
   <script src="js/bootstrap.min.js"></script>
   <script src="js/timetable.js" defer></script>
   <script src="js/timetable_analyser.js"></script>
+  <script src="js/conflictSolver.js" defer></script>
   <link rel="shortcut icon" href="favicon.ico" />
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -35,6 +36,7 @@
         <button id="load" class="btn btn-primary hide">Load data from .json</button>
         <input type="file" id="file" class="hide">
         <button id="download" class="btn btn-info pull-right">Download as .ics</button>
+		<button id="resolve" class="btn btn-info" onclick="resolveConflicts()">Resolve Conflicts</button>
       </div>
     </div>
   </div>
@@ -47,6 +49,7 @@
   </div>
 
   <script>
+  
     if(window.location.protocol !== 'file:') {
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
