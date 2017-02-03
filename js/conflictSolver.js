@@ -124,7 +124,6 @@ function EventGroupObj(data, courseObj) {
 	
 
 	this.count = function() {
-		//alert("cmp3 " + this.name + " " + this.eventObjects.length);
 		return this.eventObjects.length;
 	};
 	
@@ -141,11 +140,12 @@ function EventGroupObj(data, courseObj) {
 
 function EventObj(item, evtGrpObj){
 	this.parent = evtGrpObj;
-	this.name = filterNumbers(item.info);
+	this.name = item.info;
 	this.start = item.start;
 	this.dur = item.dur;
 	this.end = item.start + item.dur;
-	this.day = item.dayIndex;
+	this.day = item.day;
+	this.dayIndex = item.dayIndex;
 }
 
 var isConflict = function(evt1, evt2) { //checks to see if two events occur at overlapping times
@@ -176,21 +176,25 @@ var resolveConflicts = function () {
 
 	var nonconflictPermutations = [];
 	var numpermutations = tt.permute();
+	//alert(numpermutations);
 	
 	for (pc = 0; pc < numpermutations; pc++){
 		var trialset = tt.pickPermutation(pc);
 		var conflict = false;
 		for (p=0; p<trialset.length-1; p++){
-			conflict = false;
+			//console.log("new trial!");
 			for (k=p+1; k<trialset.length; k++){
 				if (isConflict(trialset[p], trialset[k])) {
 					conflict = true; 
-				}
+					//console.log("Conflict: " + trialset[p].parent.parent.name + " " + trialset[p].name + " and " + trialset[k].parent.parent.name + " " + trialset[k].name);
+				} //else 	console.log("NO Conflict: " + trialset[p].parent.parent.name + " " + trialset[p].name + " and " + trialset[k].parent.parent.name + " " + trialset[k].name);
+
 			}
 		}
-		if (conflict===false) {
+		if (conflict==false) {
+			//console.log("nonconflict!");
 			nonconflictPermutations.push(trialset[pc]);
-		}
+		} //else console.log("conflict!");
 	}
 	console.log("finished! there were " + nonconflictPermutations.length + " non-conflict variations out of " + numpermutations + " total permutations");
 }
